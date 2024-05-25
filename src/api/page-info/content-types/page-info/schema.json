@@ -1,23 +1,21 @@
 {
-  "kind": "collectionType",
-  "collectionName": "categories",
+  "kind": "singleType",
+  "collectionName": "page_infos",
   "info": {
-    "singularName": "category",
-    "pluralName": "categories",
-    "displayName": "Category",
-    "description": ""
+    "singularName": "page-info",
+    "pluralName": "page-infos",
+    "displayName": "PageInfo"
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "branchName": {
       "type": "string"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "name"
+    "contacts": {
+      "type": "string"
     },
     "heading_tag": {
       "type": "relation",

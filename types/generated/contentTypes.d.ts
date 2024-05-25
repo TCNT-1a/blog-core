@@ -788,12 +788,44 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAuthorAuthor extends Schema.CollectionType {
+  collectionName: 'authors';
+  info: {
+    singularName: 'author';
+    pluralName: 'authors';
+    displayName: 'author';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    avatar: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -801,6 +833,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     slug: Attribute.UID<'api::category.category', 'name'>;
+    heading_tag: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'api::heading-tag.heading-tag'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -831,7 +868,7 @@ export interface ApiHeadingTagHeadingTag extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    meta_description: Attribute.String &
+    title: Attribute.String &
       Attribute.SetMinMaxLength<{
         maxLength: 160;
       }>;
@@ -839,6 +876,7 @@ export interface ApiHeadingTagHeadingTag extends Schema.CollectionType {
     prev: Attribute.String;
     next: Attribute.String;
     canonical: Attribute.String;
+    meta_description: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -857,12 +895,95 @@ export interface ApiHeadingTagHeadingTag extends Schema.CollectionType {
   };
 }
 
+export interface ApiPageInfoPageInfo extends Schema.SingleType {
+  collectionName: 'page_infos';
+  info: {
+    singularName: 'page-info';
+    pluralName: 'page-infos';
+    displayName: 'PageInfo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    branchName: Attribute.String;
+    contacts: Attribute.String;
+    heading_tag: Attribute.Relation<
+      'api::page-info.page-info',
+      'oneToOne',
+      'api::heading-tag.heading-tag'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::page-info.page-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::page-info.page-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    singularName: 'post';
+    pluralName: 'posts';
+    displayName: 'Post';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::post.post', 'title'> & Attribute.Required;
+    category: Attribute.Relation<
+      'api::post.post',
+      'oneToOne',
+      'api::category.category'
+    >;
+    tags: Attribute.Relation<'api::post.post', 'manyToMany', 'api::tag.tag'>;
+    postViews: Attribute.BigInteger &
+      Attribute.Required &
+      Attribute.DefaultTo<'0'>;
+    publicDate: Attribute.Date;
+    heading_tag: Attribute.Relation<
+      'api::post.post',
+      'oneToOne',
+      'api::heading-tag.heading-tag'
+    >;
+    author: Attribute.Relation<
+      'api::post.post',
+      'oneToOne',
+      'api::author.author'
+    >;
+    post_thumbnail: Attribute.Media;
+    content: Attribute.Blocks & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTagTag extends Schema.CollectionType {
   collectionName: 'tags';
   info: {
     singularName: 'tag';
     pluralName: 'tags';
     displayName: 'tag';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -870,6 +991,12 @@ export interface ApiTagTag extends Schema.CollectionType {
   attributes: {
     name: Attribute.String;
     slug: Attribute.UID<'api::tag.tag', 'name'>;
+    heading_tag: Attribute.Relation<
+      'api::tag.tag',
+      'oneToOne',
+      'api::heading-tag.heading-tag'
+    >;
+    posts: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::post.post'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -898,8 +1025,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::heading-tag.heading-tag': ApiHeadingTagHeadingTag;
+      'api::page-info.page-info': ApiPageInfoPageInfo;
+      'api::post.post': ApiPostPost;
       'api::tag.tag': ApiTagTag;
     }
   }

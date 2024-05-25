@@ -4,7 +4,8 @@
   "info": {
     "singularName": "tag",
     "pluralName": "tags",
-    "displayName": "tag"
+    "displayName": "tag",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,6 +18,17 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "heading_tag": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::heading-tag.heading-tag"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::post.post",
+      "mappedBy": "tags"
     }
   }
 }

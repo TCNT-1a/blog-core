@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "meta_description": {
+    "title": {
       "type": "string",
       "required": false,
       "maxLength": 160
@@ -27,6 +27,9 @@
       "type": "string"
     },
     "canonical": {
+      "type": "string"
+    },
+    "meta_description": {
       "type": "string"
     }
   }
