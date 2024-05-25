@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "heading_tags",
+  "info": {
+    "singularName": "heading-tag",
+    "pluralName": "heading-tags",
+    "displayName": "HeadingTag",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "meta_description": {
+      "type": "string",
+      "required": false,
+      "maxLength": 160
+    },
+    "noindex": {
+      "type": "boolean"
+    },
+    "prev": {
+      "type": "string"
+    },
+    "next": {
+      "type": "string"
+    },
+    "canonical": {
+      "type": "string"
+    }
+  }
+}
