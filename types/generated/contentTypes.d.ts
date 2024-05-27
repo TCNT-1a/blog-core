@@ -868,7 +868,7 @@ export interface ApiHeadingTagHeadingTag extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    h_title: Attribute.String;
+    key: Attribute.String;
     noindex: Attribute.Boolean;
     prev: Attribute.String;
     next: Attribute.String;
