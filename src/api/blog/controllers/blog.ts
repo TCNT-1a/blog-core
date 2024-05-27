@@ -41,7 +41,6 @@ export default {
   },
   getTag: async (ctx, next) => {
     try {
-      console.log("getTag");
       const slug = ctx.request.url.split("/").pop();
       const service = await strapi.service("api::blog.tag").getTag(slug);
       ctx.body = { data: service };

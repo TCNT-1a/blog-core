@@ -1,5 +1,6 @@
 export default {
   getTags,
+  getTag,
 };
 
 export async function getTags() {
@@ -23,7 +24,6 @@ export async function getTags() {
 }
 
 export async function getTag(slug) {
-  console.log("hello: ", slug);
   const tags = await strapi.entityService.findMany("api::tag.tag", {
     fields: ["id", "name", "slug"],
     populate: {
@@ -31,7 +31,6 @@ export async function getTag(slug) {
     },
     filters: { slug: { $eq: slug } },
   });
-  console.log("tags", tags);
   if (tags.length === 0) {
     return null;
   }
