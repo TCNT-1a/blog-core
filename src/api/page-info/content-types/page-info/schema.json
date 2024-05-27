@@ -4,7 +4,8 @@
   "info": {
     "singularName": "page-info",
     "pluralName": "page-infos",
-    "displayName": "PageInfo"
+    "displayName": "PageInfo",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,7 +16,7 @@
       "type": "string"
     },
     "contacts": {
-      "type": "string"
+      "type": "text"
     },
     "heading_tag": {
       "type": "relation",

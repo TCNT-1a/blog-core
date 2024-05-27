@@ -8,7 +8,6 @@ export default {
 };
 //Lấy tất cả danh mục
 export async function getCategories() {
-  console.log("getCategories");
   const entries = await strapi.entityService.findMany(
     "api::category.category",
     {

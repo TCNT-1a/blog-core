@@ -2,6 +2,10 @@
  * A set of functions called "actions" for `blog`
  */
 
+import { isNumeric } from "validator";
+function fm(n) {
+  return Math.abs(parseInt(n));
+}
 export default {
   // exampleAction: async (ctx, next) => {
   //   try {
@@ -19,9 +23,13 @@ export default {
   getPosts: async (ctx, next) => {
     try {
       const { category, tag, page, limit } = ctx.request.query;
+      isNumeric(page) ? parseInt(page) : 1;
+      let p_page = isNumeric(page) ? fm(page) : 1;
+      let p_limit = isNumeric(limit) ? fm(limit) : 10;
+
       let service = await strapi
         .service("api::blog.post")
-        .getPostsByCategoryTag(category, tag, page, limit);
+        .getPostsByCategoryTag(category, tag, p_page, p_limit);
       ctx.body = { data: service };
     } catch (err) {
       ctx.body = err;

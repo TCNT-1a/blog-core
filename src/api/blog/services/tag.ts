@@ -11,10 +11,11 @@ export async function getTags() {
       },
     },
   });
+
   return entries.map((entry) => {
-    const { tagName, posts, slug } = entry;
+    const { name, posts, slug } = entry;
     return {
-      name: tagName,
+      name: name,
       slug: slug,
       count: (posts as any[]).length,
     };

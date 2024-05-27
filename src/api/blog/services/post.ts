@@ -11,16 +11,15 @@ export async function getPostsByCategoryTag(
   try {
     const filter: any = {};
     if (category) {
-      console.log("category");
       filter.category = { slug: { $eq: category } };
     }
     if (tag) {
-      console.log("tag");
       filter.tags = {
         $or: [{ slug: { $eq: tag } }, { tagName: { $eq: tag } }],
       };
     }
-    const start = (page - 1) * (limit - 1);
+    const start = (page - 1) * limit;
+    limit = limit + 1;
     const entries = await strapi.entityService.findMany("api::post.post", {
       fields: ["id", "title", "publicDate", "slug", "postViews"],
       filters: filter,

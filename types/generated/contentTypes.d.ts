@@ -901,13 +901,14 @@ export interface ApiPageInfoPageInfo extends Schema.SingleType {
     singularName: 'page-info';
     pluralName: 'page-infos';
     displayName: 'PageInfo';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     branchName: Attribute.String;
-    contacts: Attribute.String;
+    contacts: Attribute.Text;
     heading_tag: Attribute.Relation<
       'api::page-info.page-info',
       'oneToOne',
