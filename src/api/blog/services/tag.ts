@@ -21,3 +21,18 @@ export async function getTags() {
     };
   });
 }
+
+export async function getTag(slug) {
+  const tags = await strapi.entityService.findMany("api::tag.tag", {
+    fields: ["id", "name", "slug"],
+    populate: {
+      heading_tag: true,
+    },
+    filters: { slug: { $eq: slug } },
+  });
+  console.log("tags", tags);
+  if (tags.length === 0) {
+    return null;
+  }
+  return tags[0];
+}

@@ -39,6 +39,16 @@ export default {
       ctx.body = err;
     }
   },
+  getTag: async (ctx, next) => {
+    try {
+      console.log("getTag");
+      const slug = ctx.request.url.split("/").pop();
+      const service = await strapi.service("api::blog.tag").getTag(slug);
+      ctx.body = { data: service };
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
   getPost: async (ctx, next) => {
     try {
       const slug = ctx.request.url.split("/").pop();
@@ -53,6 +63,18 @@ export default {
       const service = await strapi
         .service("api::blog.category")
         .getCategories();
+      ctx.body = { data: service };
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
+  getCategory: async (ctx, next) => {
+    try {
+      console.log("getCategory");
+      const slug = ctx.request.url.split("/").pop();
+      const service = await strapi
+        .service("api::blog.category")
+        .getCategory(slug);
       ctx.body = { data: service };
     } catch (err) {
       ctx.body = err;

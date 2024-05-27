@@ -22,6 +22,8 @@ export default {
     createRoute(METHOD.GET, "/blog/posts", "blog.getPosts"),
     createRoute(METHOD.GET, "/blog/post/:slug", "blog.getPost"),
     createRoute(METHOD.GET, "/blog/categories", "blog.getCategories"),
+    createRoute(METHOD.GET, "/blog/category/:slug", "blog.getCategory"),
     createRoute(METHOD.GET, "/blog/tags", "blog.getTags"),
+    createRoute(METHOD.GET, "/blog/tag/:slug", "blog.getTag"),
   ],
 };
