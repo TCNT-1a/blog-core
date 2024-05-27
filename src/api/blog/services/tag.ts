@@ -23,6 +23,7 @@ export async function getTags() {
 }
 
 export async function getTag(slug) {
+  console.log("hello: ", slug);
   const tags = await strapi.entityService.findMany("api::tag.tag", {
     fields: ["id", "name", "slug"],
     populate: {
