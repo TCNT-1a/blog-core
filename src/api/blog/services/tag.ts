@@ -1,3 +1,7 @@
+export default {
+  getTags,
+};
+
 export async function getTags() {
   const entries = await strapi.entityService.findMany("api::tag.tag", {
     fields: ["id", "name", "slug"],
@@ -12,8 +16,7 @@ export async function getTags() {
     return {
       name: tagName,
       slug: slug,
-      // @ts-ignore
-      count: posts.length,
+      count: (posts as any[]).length,
     };
   });
 }

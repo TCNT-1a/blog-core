@@ -1,10 +1,21 @@
-export async function getPostCategoryTag(category, tag, page = 1, limit = 10) {
+export default {
+  getPostsByCategoryTag,
+  getPost,
+};
+export async function getPostsByCategoryTag(
+  category,
+  tag,
+  page = 1,
+  limit = 10
+) {
   try {
     const filter: any = {};
     if (category) {
+      console.log("category");
       filter.category = { slug: { $eq: category } };
     }
     if (tag) {
+      console.log("tag");
       filter.tags = {
         $or: [{ slug: { $eq: tag } }, { tagName: { $eq: tag } }],
       };
