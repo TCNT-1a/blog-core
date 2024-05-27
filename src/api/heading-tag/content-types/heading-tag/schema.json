@@ -12,10 +12,8 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string",
-      "required": false,
-      "maxLength": 160
+    "h_title": {
+      "type": "string"
     },
     "noindex": {
       "type": "boolean"
@@ -30,7 +28,12 @@
       "type": "string"
     },
     "meta_description": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 160
+    },
+    "title": {
+      "type": "string",
+      "required": false
     }
   }
 }

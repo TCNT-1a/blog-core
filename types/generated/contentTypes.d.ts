@@ -868,15 +868,16 @@ export interface ApiHeadingTagHeadingTag extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String &
-      Attribute.SetMinMaxLength<{
-        maxLength: 160;
-      }>;
+    h_title: Attribute.String;
     noindex: Attribute.Boolean;
     prev: Attribute.String;
     next: Attribute.String;
     canonical: Attribute.String;
-    meta_description: Attribute.String;
+    meta_description: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 160;
+      }>;
+    title: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

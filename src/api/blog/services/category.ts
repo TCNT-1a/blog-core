@@ -24,8 +24,8 @@ async function getCategory(slug) {
       heading_tag: {
         fields: [
           "id",
-          "title",
-          "meta_description",
+          // "title",
+          // "meta_description",
           "canonical",
           "next",
           "prev",
