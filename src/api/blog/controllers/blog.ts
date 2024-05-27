@@ -15,17 +15,12 @@ export default {
   //   }
   // }
 
-  // createRoute(METHOD.GET, "/blog/post", "blog.getPosts"),
-  // createRoute(METHOD.GET, "/blog/post/:slug", "blog.getPost"),
-  // createRoute(METHOD.GET, "/blog/category", "blog.getCategories"),
-  // createRoute(METHOD.GET, "/blog/tag", "blog.getTags"),
-
   getPosts: async (ctx, next) => {
     try {
       const { category, tag, page, limit } = ctx.request.query;
-      isNumeric(page) ? parseInt(page) : 1;
-      let p_page = isNumeric(page) ? fm(page) : 1;
-      let p_limit = isNumeric(limit) ? fm(limit) : 10;
+
+      let p_page = page && isNumeric(page) ? fm(page) : 1;
+      let p_limit = limit && isNumeric(limit) ? fm(limit) : 10;
 
       let service = await strapi
         .service("api::blog.post")
