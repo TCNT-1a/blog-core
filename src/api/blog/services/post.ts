@@ -1,6 +1,7 @@
 export default {
   getPostsByCategoryTag,
   getPost,
+  getPostsByTitle,
 };
 export async function getPostsByCategoryTag(
   category,
@@ -90,5 +91,41 @@ export async function getPost(slug) {
     return entry[0];
   } else {
     return null;
+  }
+}
+
+export async function getPostsByTitle(title: string, page = 1, limit = 10) {
+  try {
+    const start = (page - 1) * limit;
+    limit = limit + 1;
+    const entries = await strapi.entityService.findMany("api::post.post", {
+      fields: ["id", "title", "publicDate", "slug", "postViews"],
+      filters: {
+        title: { $contains: title },
+      },
+      publicationState: "live",
+      start: start,
+      limit: limit,
+      populate: {
+        author: {
+          fields: ["id", "name"],
+          populate: { avatar: { fields: ["id", "url"] } },
+        },
+        tags: {
+          fields: ["name"],
+        },
+        category: {
+          fields: ["slug"],
+        },
+        post_thumbnail: {
+          fields: ["url"],
+        },
+        heading_tag: true,
+      },
+    });
+
+    return entries;
+  } catch (err) {
+    return err;
   }
 }

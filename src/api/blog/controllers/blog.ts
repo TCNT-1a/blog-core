@@ -3,7 +3,6 @@
  */
 
 import { isNumeric } from "validator";
-import { getHeadingTag } from "../services/heading-tag";
 function fm(n) {
   return Math.abs(parseInt(n));
 }
@@ -31,7 +30,21 @@ export default {
       ctx.body = err;
     }
   },
-
+  searchPosts: async (ctx, next) => {
+    try {
+      const { title, page, limit } = ctx.request.query;
+      let p_page = page && isNumeric(page) ? fm(page) : 1;
+      let p_limit = limit && isNumeric(limit) ? fm(limit) : 10;
+      if (title) {
+        let service = await strapi
+          .service("api::blog.post")
+          .getPostsByTitle(title, p_page, p_limit);
+        ctx.body = { data: service };
+      } else return { data: [] };
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
   getTags: async (ctx, next) => {
     try {
       const service = await strapi.service("api::blog.tag").getTags();
@@ -81,7 +94,9 @@ export default {
   },
   getHeadingTag: async (ctx, next) => {
     const { key } = ctx.request.query;
-    const service = await getHeadingTag(key);
+    const service = await strapi
+      .service("api::blog.heading-tag")
+      .getHeadingTag(key);
     ctx.body = { data: service };
   },
 };

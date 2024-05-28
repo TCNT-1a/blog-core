@@ -19,6 +19,7 @@ function createRoute(method, path, handler) {
 
 export default {
   routes: [
+    createRoute(METHOD.GET, "/blog/search", "blog.searchPosts"),
     createRoute(METHOD.GET, "/blog/posts", "blog.getPosts"),
     createRoute(METHOD.GET, "/blog/post/:slug", "blog.getPost"),
     createRoute(METHOD.GET, "/blog/categories", "blog.getCategories"),
