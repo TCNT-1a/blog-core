@@ -22,15 +22,7 @@ async function getCategory(slug) {
     fields: ["id", "name", "slug"],
     populate: {
       heading_tag: {
-        fields: [
-          "id",
-          "title",
-          "meta_description",
-          "canonical",
-          "next",
-          "prev",
-          "noindex",
-        ],
+        fields: ["id", "title", "meta_description", "canonical", "noindex"],
       },
     },
     filters: { slug: { $eq: slug } },

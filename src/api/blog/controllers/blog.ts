@@ -3,6 +3,7 @@
  */
 
 import { isNumeric } from "validator";
+import { getHeadingTag } from "../services/heading-tag";
 function fm(n) {
   return Math.abs(parseInt(n));
 }
@@ -69,7 +70,6 @@ export default {
   },
   getCategory: async (ctx, next) => {
     try {
-      console.log("getCategory");
       const slug = ctx.request.url.split("/").pop();
       const service = await strapi
         .service("api::blog.category")
@@ -78,5 +78,10 @@ export default {
     } catch (err) {
       ctx.body = err;
     }
+  },
+  getHeadingTag: async (ctx, next) => {
+    const { key } = ctx.request.query;
+    const service = await getHeadingTag(key);
+    ctx.body = { data: service };
   },
 };

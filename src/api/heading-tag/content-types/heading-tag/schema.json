@@ -19,12 +19,6 @@
     "noindex": {
       "type": "boolean"
     },
-    "prev": {
-      "type": "string"
-    },
-    "next": {
-      "type": "string"
-    },
     "canonical": {
       "type": "string"
     },

@@ -37,7 +37,7 @@ export async function getPostsByCategoryTag(
         category: {
           fields: ["slug"],
         },
-        featureImage: {
+        post_thumbnail: {
           fields: ["url"],
         },
         heading_tag: true,

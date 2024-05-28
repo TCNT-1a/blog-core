@@ -870,8 +870,6 @@ export interface ApiHeadingTagHeadingTag extends Schema.CollectionType {
   attributes: {
     key: Attribute.String;
     noindex: Attribute.Boolean;
-    prev: Attribute.String;
-    next: Attribute.String;
     canonical: Attribute.String;
     meta_description: Attribute.String &
       Attribute.SetMinMaxLength<{
