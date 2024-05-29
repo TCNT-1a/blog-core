@@ -1,3 +1,9 @@
+//công việc còn lại
+//tạo thời gian tạo sitemap khi có bài viết mới (khó)
+//đưa sitemap vào robots.txt
+//tạo robots.txt
+//đưa sitemap xuất ra ngoài frontend
+
 export const HOST_FE = "https://localhost:4000";
 export const sitemaps = [
   "sitemap.xml",
