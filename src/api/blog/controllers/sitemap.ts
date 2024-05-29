@@ -1,16 +1,27 @@
-const HOST_FE = "https://yourwebsite.com";
+export const HOST_FE = "https://localhost:4000";
+export const sitemaps = [
+  "sitemap.xml",
+  "sitemap-categories.xml",
+  "sitemap-tags.xml",
+  "sitemap-posts.xml",
+];
 export default {
   generateSiteMap: async (ctx, next) => {
-    const loc = "";
-    const e = { updatedAt: new Date() };
-    const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-                        <url>
-                          <loc>${loc}</loc>
-                          <lastmod>${new Date(
-                            e.updatedAt
-                          ).toISOString()}</lastmod>
-                        </url>
-                    </urlset>`;
+    const sitemap = `
+      <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+        <sitemap>
+        <loc>${HOST_FE}/${sitemaps[1]}</loc>
+        <lastmod>2024-05-01</lastmod>
+        </sitemap>
+        <sitemap>
+        <loc>${HOST_FE}/${sitemaps[2]}</loc>
+        <lastmod>2024-05-01</lastmod>
+        </sitemap>
+        <sitemap>
+        <loc>${HOST_FE}/${sitemaps[3]}</loc>
+        <lastmod>2024-05-01</lastmod>
+        </sitemap>
+      </sitemapindex>`;
 
     ctx.set("Content-Type", "text/xml");
     ctx.send(sitemap);
